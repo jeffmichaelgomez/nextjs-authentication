@@ -1,0 +1,252 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Josefin sans', sans-serif;
+  text-decoration: none;
+}
+
+body {
+  font-family: 'roboto', sans-serif;
+  background: url(bgtry.png) no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  transition: all 0.5s ease;
+}
+
+/* Sidebar styles */
+.Sidebar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: #696868;
+  width: 90px; /* Adjust width as needed */
+  overflow: hidden;
+  transition: width 0.2s linear;
+
+}
+
+/* Logo styles */
+.logo {
+  text-align: center;
+  display: flex;
+  transition: all 0.5s ease;
+}
+
+.logo img {
+  width: 70px;
+  height: 70px;
+}
+
+.logo span {
+  font-weight: bold;
+  margin-top: 30px;
+  padding: 8px;
+  color: rgb(231, 227, 227);
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+
+/* Link styles */
+a {
+  position: relative;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  display: table;
+  width: 300px;
+  padding: 12px;
+}
+
+/* FontAwesome icon styles */
+.fas {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-top: 20px;
+  top: 14px;
+  margin-left: 16px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.nav-item {
+  position: relative;
+  top: -10px;
+  margin-left: 70px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; 
+}
+
+
+a {
+  position: relative;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  display: table;
+  width: 300px;
+  padding: 12px;
+}
+
+/* FontAwesome icon styles */
+.fas {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-top: 35px;
+  top: 16px;
+  
+ 
+
+}
+
+.nav-item {
+  position: relative;
+  top: -10px;
+  margin-left: 80px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; 
+}
+
+a:hover {
+  background: #333333;
+}
+
+.Sidebar:hover {
+  width: 240px;
+  transition: all 0.5s ease;
+}
+
+.logout{
+    position: absolute ;
+    bottom: 0;
+}
+
+
+.box1 {
+   background: transparent;
+    width: 40%;
+    backdrop-filter: blur(5px);
+    height: 80px;
+    border: 2px solid rgb(255, 255, 255,0.5);
+    margin-left: 33%;
+    position: relative;
+    transform: translateY(100px); 
+}
+.box1 p{
+    text-align: center;
+    transform: translateY(30px);
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    font-family: 'Josefin sans', sans-serif;
+}
+.box2{
+   background: transparent;
+   border: 2px solid rgba(255, 255, 255, 0.5);
+    width: 16%;
+    backdrop-filter: blur(20px);
+    height: 63%;
+    margin-left: 13%;
+    position: relative;
+    transform: translateY(70px); 
+    
+}
+.box2 .fas{
+    position: relative;
+width: 25px;
+height: 30px;
+margin-top: 20;
+top: 14px;
+font-size: 20px;
+text-align: center;
+}
+.box2 a:hover{
+    background: #949393 ;
+    width: 100%;
+}
+.box2 ul li a {
+    cursor: pointer;
+  }
+  .box2 p{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: bold;
+   
+   
+  }
+ .content {
+    display: none;
+  }
+  .content.active {
+    display: block;
+  }
+
+  .box3 {
+background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    width: 50%;
+    backdrop-filter: blur(15px);
+    margin-left: calc(30% + 20px); /* Adjust the margin-left value to position it correctly */
+    padding: 10px;
+    position: absolute;
+    top: calc(20% + 70px); /* Adjust the top value to match the height of box2 */
+    height: 50%;
+    color: white;
+    
+
+    
+  }
+ .box3 h1{
+    text-align: center;
+ }
+ 
+ .form-group {
+    margin-left: 25%;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-top: 40px;
+    
+  }
+
+  label {
+    display: block;
+   padding: 10px;
+    font-weight: bold;
+  }
+  
+  .box3 span {
+    padding: 3px 20px;
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+    
+      
+      
+  }
+  .details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+ 
+  .form-group1 span {
+    display: inline-block;
+    max-width: 400px; /* Adjust the maximum width as needed */
+    word-wrap: break-word;
+  }
+
+  .form-group1 {
+    margin-left: 25%;
+ 
+    margin-top: 40px;
+    
+  }

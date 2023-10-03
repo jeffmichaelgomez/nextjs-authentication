@@ -1,0 +1,289 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Josefin sans', sans-serif;
+  text-decoration: none;
+}
+
+body {
+  font-family: 'roboto', sans-serif;
+  background: url(bgtry.png) no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  transition: all 0.5s ease;
+}
+
+/* Sidebar styles */
+.Sidebar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: #696868;
+  width: 90px; /* Adjust width as needed */
+  overflow: hidden;
+  transition: width 0.2s linear;
+
+}
+
+/* Logo styles */
+.logo {
+  text-align: center;
+  display: flex;
+  transition: all 0.5s ease;
+}
+
+.logo img {
+  width: 70px;
+  height: 70px;
+}
+
+.logo span {
+  font-weight: bold;
+  margin-top: 30px;
+  padding: 8px;
+  color: rgb(231, 227, 227);
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+
+/* Link styles */
+a {
+  position: relative;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  display: table;
+  width: 300px;
+  padding: 12px;
+}
+
+/* FontAwesome icon styles */
+.fas {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-top: 20px;
+  top: 14px;
+  margin-left: 16px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.nav-item {
+  position: relative;
+  top: -10px;
+  margin-left: 70px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; 
+}
+
+
+a {
+  position: relative;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  display: table;
+  width: 300px;
+  padding: 12px;
+}
+
+/* FontAwesome icon styles */
+.fas {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-top: 35px;
+  top: 16px;
+  
+ 
+
+}
+
+.nav-item {
+  position: relative;
+  top: -10px;
+  margin-left: 80px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; 
+}
+
+a:hover {
+  background: #333333;
+}
+
+.Sidebar:hover {
+  width: 240px;
+  transition: all 0.5s ease;
+}
+
+.logout{
+    position: absolute ;
+    bottom: 0;
+}
+
+
+
+
+.outer{
+    width: 1000px;
+    height:597px;
+    margin-left: 32%;
+    margin-right: 55px;
+    margin-bottom: 350px;
+   background: rgb(206, 202, 202);
+    border: 1px solid black;
+    border-radius: 4PX;
+    box-shadow: 0px 0px 3px black;
+}
+table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #000;
+    padding: 30px;
+    text-align: center;
+    color: #000;
+}
+
+th {
+    background-color: #747575;
+}
+
+
+
+/* Center the table */
+.table-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-71%, -50%); /* Adjust the margin as needed */
+    
+}
+.date-input {
+    width: 100%;
+    font-size: 15px;
+}
+input{
+    background: transparent;
+    height: 70%;
+    width: 80%;
+    border: none;
+}
+
+.requested{
+    background-color: #93c9f5 ;
+}
+
+.current{
+    background-color: #91f5c3 ;
+}
+
+.row1{
+    font-weight: 600;
+}
+
+.row2{
+    font-weight: 600;
+}
+.row3{
+    font-weight: 600;
+}
+.row4{
+    font-weight: 600;
+}
+.row5{
+    font-weight: 600;
+}
+.row6{
+    font-weight: 600;
+}
+
+
+.note {
+    
+    background-color: aliceblue;
+    border-radius: 8px;
+    padding: 22px;
+    max-width: 800px;
+      /* Center the note on the page */
+}
+
+/* Styling for the note textarea */
+.note textarea {
+    width: 100%;
+    font-size: 18px;
+   
+    color: #333;
+    border: none;
+    resize: none; /* Prevent resizing of textarea */
+    outline: none; /* Remove default focus outline */
+    background-color: transparent; /* Transparent background */
+}
+
+/* Customize the link color inside the note */
+.note a {
+    color: #007bff;
+    text-decoration: underline;
+}
+p{
+    font-weight: bold;
+    font-size: 20px;
+  margin-top: 2;
+}
+.hint{
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #686969;
+}
+
+
+.file-form {
+    text-align: center;
+    margin: 20px;
+    
+
+}
+
+
+
+.file-form button {
+    padding: 8px 15px;
+    font-size: 16px;
+    width: 500px;
+    margin-right: 50    ;
+    border: none;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.file-form button:hover {
+    background-color: #0056b3;
+}
+
+.note button{
+    padding: 8px 15px;
+    font-size: 16px;
+    width: 200px;
+    margin-left: 70%   ;
+    border: none;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    
+
+}

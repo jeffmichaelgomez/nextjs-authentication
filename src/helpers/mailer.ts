@@ -14,16 +14,15 @@ export const sendEmail = async({email, emailType, userId}:any) => {
        }
        
        var transporter = nodemailer.createTransport({
-            host: "sandbox.smtp.mailtrap.io",
-            port: 2525,
+            host: "live.smtp.mailtrap.io",
+            port: 587,
             auth: {
-            user: "540bde2c074da5",
-            pass: process.env.NODE_MAILER_SECRET!
+                user: "api",
+                pass: process.env.NODE_MAILER_SECRET_PR!
             }
         });
 
         const info = await transporter.sendMail({
-            from: 'noreply@gmail.com', // sender address
             to: email, // list of receivers
             subject: emailType === "VERIFY" ? "Email Verification":"Password Reset Request", // Subject line
             html: `<p>Click <a href="${process.env.domain}/${emailType === "VERIFY" ? 'verifyemail' : 'resetpassword'}?token=${emailType === "VERIFY" ? hashedToken : hashedEmail}">here</a> to ${emailType === "VERIFY" ? "verify your email" : "reset your password"}</p>`
