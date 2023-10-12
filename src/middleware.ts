@@ -9,24 +9,12 @@ interface MyJwtPayload extends jwt.JwtPayload {
 // This function can be marked 'async' if using 'await' inside
 export function middleware(request: NextRequest){
 
-    let isAdmin = false;
     const path = request.nextUrl.pathname
     const isPublicPath = ['/login','/signup', '/verifyemail'].includes(path)
     const adminOnlyPaths = ['/products', '/addproduct'].includes(path);
 
     const token = request.cookies.get('token')?.value || ''
-    if (token) {
-        try {
-            const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET!) as jwt.JwtPayload;
-    
-            if (typeof decodedToken !== 'string' && decodedToken.hasOwnProperty('isAdmin')) {
-                isAdmin = (decodedToken as MyJwtPayload).isAdmin;
-            }
-    
-        } catch (error) {
-            console.error("Invalid token:", error);
-        }
-    }
+    const isAdmin = request.cookies.get('isAdmin')?.value === 'true'
 
     if(isPublicPath && token){
         return NextResponse.redirect(new URL('/profile', request.nextUrl))

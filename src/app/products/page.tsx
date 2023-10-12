@@ -97,7 +97,7 @@ function ProductList() {
               onClick={() => setPage((prev) => prev - 1)}
               disabled={page === 1}
             >
-              Previous
+              Prev
             </SubmitButton>
             <SubmitButton style={{ marginRight: "220px" }} onClick={() => setPage((prev) => prev + 1)}>
               Next
