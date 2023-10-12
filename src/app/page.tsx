@@ -28,5 +28,3 @@ export default function Home() {
     </main>
   )
 }
-
-//bobo mo joseph supot
