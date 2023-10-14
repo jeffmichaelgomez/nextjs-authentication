@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Container, GlassBox, Input, Button, InputContainer, FormTitle, ActionGroup, FormRow, FormLabelSide, LabelP } from './SignupStyles';
+import Swal from "sweetalert2";
 
 export default function SignupPage(){
     const router = useRouter();
@@ -22,11 +23,40 @@ export default function SignupPage(){
             setLoading(true);
             const response = await axios.post("/api/users/signup", user);
             console.log("Signup Success", response.data);
-            toast.success("Signup Success");
+            Swal.fire({
+                position: 'top-end', // Position to top-end
+                icon: 'success',
+                title: 'Logged in successfully!',
+                showConfirmButton: false,
+                timer: 1500,
+                toast: true, // Enable toast mode
+                background: '#efefef',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
             router.push("/login");
         }catch (error: any){
-            console.log("Signup failed", error.message);
-            toast.error(error.message);
+           console.log("Signup failed", error.message);
+           Swal.fire({
+            position: 'top-end', // Position to top-end
+            icon: 'error',
+            title: 'Oops...',
+            text: error.message,
+            showConfirmButton: false,
+            timer: 3000,
+            toast: true, // Enable toast mode
+            background: '#efefef',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
         } finally {
             setLoading(false);
         }

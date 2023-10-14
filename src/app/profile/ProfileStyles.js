@@ -1,55 +1,87 @@
 import styled from 'styled-components';
 
-export const FormWrapper = styled.div`
-	flex: 1;
+export const Container = styled.div`
 	display: flex;
-	justify-content: center;
+	flex-direction: row-reverse;
 	align-items: center;
-	height: 100vh;
-	padding: 1rem;
-	background-color: #f4f5f7;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 2rem;
+	background: linear-gradient(to right, #bd5b5b, #000000);
 `;
 
-export const StyledForm = styled.div`
-	background-color: #ffffff;
+export const GlassBox = styled.div`
+	align-items: center;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(5px);
 	padding: 2rem 4rem;
-	border-radius: 10px;
-	box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
 	width: 60%;
-	max-width: 600px;
-	color: #000;
-`;
-
-export const FormTitle = styled.h2`
-	font-size: 24px;
-	margin-bottom: 1.5rem;
+	max-width: 800px;
+	border-radius: 15px;
+	box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+	color: #ffffff; // white text for better readability against the frosted glass background
+	text-align: center;
 `;
 
 export const ProfileInfo = styled.div`
-	margin-bottom: 1.5rem;
-	font-size: 16px;
+	margin: 2rem 0;
 `;
 
-export const StyledButton = styled.button`
-	background-color: #0077ff;
+export const LabelP = styled.p`
+	color: #e2e2e2; // a lighter shade for better readability
+	margin-bottom: 1rem;
+	font-size: 1.1rem;
+	font-weight: 500;
+`;
+
+export const FormTitle = styled.h1`
+	font-size: 2.5rem;
+	margin-bottom: 1.5rem;
 	color: #ffffff;
-	padding: 10px 15px;
+	font-weight: 600;
+`;
+
+export const Button = styled.button`
+	color: #ffffff;
+	display: block;
+	margin: 1rem auto;
+	padding: 0.8rem 1.5rem;
+	width: 40%;
 	border: none;
-	border-radius: 5px;
-	font-size: 16px;
+	border-radius: 25px;
+	background-color: rgba(0, 0, 0, 0.5);
 	cursor: pointer;
-	transition: background-color 0.2s;
+	font-size: 1rem;
+	transition: background-color 0.3s, transform 0.3s;
 
 	&:hover {
-		background-color: #0055cc;
+		background-color: rgba(0, 0, 0, 0.7);
+		transform: scale(1.05);
 	}
 `;
 
-export const AdminButton = styled(StyledButton)`
-	margin-top: 1rem;
-	background-color: #ff9900;
+export const ActionGroup = styled.div`
+	margin-top: 2rem;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+`;
 
+export const AdminButton = styled.button`
+	color: #ffffff;
+	display: block;
+	margin: 1rem auto;
+	padding: 0.8rem 1.5rem;
+	width: 40%;
+	border: none;
+	border-radius: 25px;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: background-color 0.3s, transform 0.3s;
+
+	background-color: ${(props) => (props.disabled ? '#827f80' : '#e1426a')};
+	cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 	&:hover {
-		background-color: #cc7a00;
+		background-color: ${(props) => (props.disabled ? '#827f80' : '#91072a')};
 	}
 `;

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import toast from 'react-hot-toast';
 import { Container, GlassBox, Input, Button, InputContainer, FormTitle, ActionGroup, FormRow, FormLabelSide, LabelP} from './LoginStyles';
+import Swal from 'sweetalert2';
 
 export default function LoginPage() {
 	const router = useRouter();
@@ -21,11 +21,40 @@ export default function LoginPage() {
 			setLoading(true);
 			const response = await axios.post('/api/users/login', user);
 			console.log('Login success', response.data);
-			toast.success('Login Success');
-			router.push('/profile');
+            Swal.fire({
+                position: 'top-end', // Position to top-end
+                icon: 'success',
+                title: 'Logged in successfully!',
+                showConfirmButton: false,
+                timer: 1500,
+                toast: true, // Enable toast mode
+                background: '#efefef',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+            router.push('/profile');
 		} catch (error: any) {
 			console.log('Login failed', error.message);
-			toast.error(error.message);
+			Swal.fire({
+                position: 'top-end', // Position to top-end
+                icon: 'error',
+                title: 'Oops...',
+                text: error.message,
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true, // Enable toast mode
+                background: '#efefef',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
 		} finally {
 			setLoading(false);
 		}
