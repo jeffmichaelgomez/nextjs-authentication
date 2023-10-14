@@ -73,12 +73,24 @@ function ProductList() {
   };
 
   const [search, setSearch] = useState("");
+  const [searchTermForQuery, setSearchTermForQuery] = useState("");
+
+  useEffect(() => {
+    // This will clear the timeout in case the user is still typing
+    const timer = setTimeout(() => {
+      setSearchTermForQuery(search);
+    }, 500); // 1-second delay
+  
+    // Clear the timer when the component is unmounted or when the search value changes
+    return () => clearTimeout(timer);
+  }, [search]);
+  
 
   useEffect(() => {
     async function fetchProducts() {
       setLoading(true);
       try {
-        const response = await axios.get(`/api/products?page=${page}&search=${search}`);
+        const response = await axios.get(`/api/products?page=${page}&search=${searchTermForQuery}`);
         setProducts(response.data.products);
       } catch (error) {
         console.error(error);
@@ -86,9 +98,10 @@ function ProductList() {
         setLoading(false);
       }
     }
-
+  
     fetchProducts();
-  }, [page, search]);
+  }, [page, searchTermForQuery]);
+  
 
   return (
     <div style={{ display: "flex" }}>
