@@ -12,7 +12,7 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     try {
-      await axios.get('/api/users/logout');
+      await fetch('/api/users/logout');
       toast.success("Logout Success");
       router.push("/login");
     } catch (error: any) {
