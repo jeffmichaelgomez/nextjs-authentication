@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
 	display: flex;
@@ -99,4 +99,22 @@ export const LabelP = styled.p`
 	color: lightgreen;
 	justify-content: space-between;
 	font-weight: 500;
+`;
+
+const spin = keyframes`
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+`;
+
+export const Spinner = styled.div`
+	border: 5px solid rgba(255, 255, 255, 0.3);
+	border-radius: 50%;
+	border-top: 5px solid #fff;
+	width: 40px;
+	height: 40px;
+	animation: ${spin} 1s linear infinite;
+	position: fixed; /* Positioning it fixed */
+	top: 50%; /* Centering vertically */
+	left: 50%; /* Centering horizontally */
+	transform: translate(-50%, -50%); /* Fine-tuning the centering */
 `;

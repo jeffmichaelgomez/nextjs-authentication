@@ -1,129 +1,178 @@
-"use client";
-import Link from "next/link";
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { Container, GlassBox, Input, Button, InputContainer, FormTitle, ActionGroup, FormRow, FormLabelSide, LabelP } from './SignupStyles';
-import Swal from "sweetalert2";
+'use client';
+import Link from 'next/link';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import {
+	Container,
+	GlassBox,
+	Input,
+	Button,
+	InputContainer,
+	FormTitle,
+	ActionGroup,
+	FormRow,
+	FormLabelSide,
+	LabelP,
+	Spinner,
+} from './SignupStyles';
+import Swal from 'sweetalert2';
 
-export default function SignupPage(){
-    const router = useRouter();
-    const [user, setUser] = React.useState({
-        email: "",
-        password: "",
-        username: ""
-    });
+export default function SignupPage() {
+	const router = useRouter();
+	const [user, setUser] = React.useState({
+		email: '',
+		password: '',
+		username: '',
+	});
 
-    const [buttonDisabled, setButtonDisabled] = React.useState(true);
-    const [loading, setLoading] = React.useState(false);
+	const [buttonDisabled, setButtonDisabled] = React.useState(true);
+	const [loading, setLoading] = React.useState(false);
+	const [minLoadComplete, setMinLoadComplete] = React.useState(false);
 
-    const onSignup = async() => {
-        try{
-            setLoading(true);
-            const response = await axios.post("/api/users/signup", user);
-            console.log("Signup Success", response.data);
-            Swal.fire({
-                position: 'top-end', // Position to top-end
-                icon: 'success',
-                title: 'Logged in successfully!',
-                showConfirmButton: false,
-                timer: 1500,
-                toast: true, // Enable toast mode
-                background: '#efefef',
-                showClass: {
-                    popup: 'animate__animated animate__fadeInDown'
-                },
-                hideClass: {
-                    popup: 'animate__animated animate__fadeOutUp'
-                }
-            });
-            router.push("/login");
-        }catch (error: any){
-           console.log("Signup failed", error.message);
-           Swal.fire({
-            position: 'top-end', // Position to top-end
-            icon: 'error',
-            title: 'Oops...',
-            text: error.message,
-            showConfirmButton: false,
-            timer: 3000,
-            toast: true, // Enable toast mode
-            background: '#efefef',
-            showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-            }
-        });
-        } finally {
-            setLoading(false);
-        }
-    };
+	const onSignup = async () => {
+		try {
+			setLoading(true); // Start the loading spinner immediately
+			setMinLoadComplete(false);
 
-    useEffect(() => {
-        if (user.email.length > 3 && user.password.length > 3 && user.username.length > 3){
-            setButtonDisabled(false);
-        } else{
-            setButtonDisabled(true);
-        }
-    },[user]);
+			// This will set minLoadComplete to true after 3 seconds
+			setTimeout(() => {
+				setMinLoadComplete(true);
+			}, 3000);
+			const response = await axios.post('/api/users/signup', user);
+			console.log('Signup Success', response.data);
+			Swal.fire({
+				position: 'top-end', // Position to top-end
+				icon: 'success',
+				title: 'Logged in successfully!',
+				showConfirmButton: false,
+				timer: 1500,
+				toast: true, // Enable toast mode
+				background: '#efefef',
+				showClass: {
+					popup: 'animate__animated animate__fadeInDown',
+				},
+				hideClass: {
+					popup: 'animate__animated animate__fadeOutUp',
+				},
+			});
+			router.push('/login');
+		} catch (error: any) {
+			console.log('Signup failed', error.message);
+			Swal.fire({
+				position: 'top-end', // Position to top-end
+				icon: 'error',
+				title: 'Oops...',
+				text: error.message,
+				showConfirmButton: false,
+				timer: 3000,
+				toast: true, // Enable toast mode
+				background: '#efefef',
+				showClass: {
+					popup: 'animate__animated animate__fadeInDown',
+				},
+				hideClass: {
+					popup: 'animate__animated animate__fadeOutUp',
+				},
+			});
+		} finally {
+			if (minLoadComplete) {
+				setLoading(false);
+			} else {
+				// If minLoadComplete is not true yet, wait until it is true to stop loading
+				const checkInterval = setInterval(() => {
+					if (minLoadComplete) {
+						setLoading(false);
+						clearInterval(checkInterval);
+					}
+				}, 100); // Check every 100ms
+			}
+		}
+	};
 
-    return (
-        <Container>
-            <GlassBox>
-                <FormTitle>{loading ? "Processing ..." : "Register"}</FormTitle>
+	useEffect(() => {
+		if (
+			user.email.length > 3 &&
+			user.password.length > 3 &&
+			user.username.length > 3
+		) {
+			setButtonDisabled(false);
+		} else {
+			setButtonDisabled(true);
+		}
+	}, [user]);
 
-                <FormRow>
-                    <FormLabelSide htmlFor="username">Username:</FormLabelSide>
-                    <InputContainer>
-                        <Input
-                            id="username"
-                            type="text" 
-                            value={user.username}
-                            placeholder="username"
-                            onChange={(e) => setUser({...user, username: e.target.value})}
-                        />
-                    </InputContainer>
-                </FormRow>
+	return (
+		<Container>
+			{loading ? (
+				<Spinner />
+			) : (
+				<>
+					<GlassBox>
+						<FormTitle>{loading ? 'Processing ...' : 'Register'}</FormTitle>
 
-                <FormRow>
-                    <FormLabelSide htmlFor="email">Email:</FormLabelSide>
-                    <InputContainer>
-                        <Input
-                            id="email"
-                            type="text" 
-                            value={user.email}
-                            placeholder="user@mail.com"
-                            onChange={(e) => setUser({...user, email: e.target.value})}
-                        />
-                    </InputContainer>
-                </FormRow>
+						<FormRow>
+							<FormLabelSide htmlFor="username">Username:</FormLabelSide>
+							<InputContainer>
+								<Input
+									id="username"
+									type="text"
+									value={user.username}
+									placeholder="username"
+									onChange={(e) =>
+										setUser({ ...user, username: e.target.value })
+									}
+								/>
+							</InputContainer>
+						</FormRow>
 
-                <FormRow>
-                    <FormLabelSide htmlFor="password">Password:</FormLabelSide>
-                    <InputContainer>
-                        <Input
-                            id="password"
-                            type="password" 
-                            value={user.password}
-                            placeholder="password"
-                            onChange={(e) => setUser({...user, password: e.target.value})}
-                        />
-                    </InputContainer>
-                </FormRow>
+						<FormRow>
+							<FormLabelSide htmlFor="email">Email:</FormLabelSide>
+							<InputContainer>
+								<Input
+									id="email"
+									type="text"
+									value={user.email}
+									placeholder="user@mail.com"
+									onChange={(e) => setUser({ ...user, email: e.target.value })}
+								/>
+							</InputContainer>
+						</FormRow>
 
-                <Button onClick={onSignup} disabled={buttonDisabled}>
-                    Register
-                </Button>
+						<FormRow>
+							<FormLabelSide htmlFor="password">Password:</FormLabelSide>
+							<InputContainer>
+								<Input
+									id="password"
+									type="password"
+									value={user.password}
+									placeholder="password"
+									onChange={(e) =>
+										setUser({ ...user, password: e.target.value })
+									}
+								/>
+							</InputContainer>
+						</FormRow>
 
-                <ActionGroup>
-                    <Link href="/login" passHref>
-                        <LabelP>Login Here</LabelP>
-                    </Link>
-                </ActionGroup>
-            </GlassBox>
-        </Container>
-    )
+						<Button
+							onClick={onSignup}
+							disabled={buttonDisabled}
+						>
+							Register
+						</Button>
+
+						<ActionGroup>
+							<Link
+								href="/login"
+								passHref
+							>
+								<LabelP>Login Here</LabelP>
+							</Link>
+						</ActionGroup>
+					</GlassBox>
+				</>
+			)}
+		</Container>
+	);
 }
