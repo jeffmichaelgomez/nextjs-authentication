@@ -82,6 +82,7 @@ export const AdminButton = styled.button`
 	background-color: ${(props) => (props.disabled ? '#827f80' : '#e1426a')};
 	cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 	&:hover {
+		transform: ${(props) => (props.disabled ? 'scale(1.00)' : 'scale(1.05)')};
 		background-color: ${(props) => (props.disabled ? '#827f80' : '#91072a')};
 	}
 `;

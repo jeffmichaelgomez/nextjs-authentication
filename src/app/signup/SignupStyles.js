@@ -48,10 +48,12 @@ export const Button = styled.button`
 	width: 30%; /* Makes the button wider; adjust as needed */
 	border-radius: 15px;
 	outline: none;
+	transition: background-color 0.3s, transform 0.3s;
 	background-color: ${(props) => (props.disabled ? '#827f80' : '#e1426a')};
 	cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 	&:hover {
 		background-color: ${(props) => (props.disabled ? '#827f80' : '#91072a')};
+		transform: ${(props) => (props.disabled ? 'scale(1.00)' : 'scale(1.05)')};
 	}
 	margin-top: 3rem;
 	font-weight: 500;
