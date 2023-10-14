@@ -17,7 +17,7 @@ export default function Sidebar() {
       router.push("/login");
     } catch (error: any) {
         console.log(error.message);
-        toast.error(error.message);
+        toast.error(error.message || "An error occurred during logout.");
     }
   };
 

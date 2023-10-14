@@ -76,15 +76,23 @@ export default function LoginPage() {
 			});
             setLoading(false);  // Stop spinner immediately
 		} finally {
+			let checkCount = 0;
+			const maxChecks = 30;  // Maximum of 3 seconds waiting (30 checks * 100ms)
 			const checkInterval = setInterval(() => {
-                if (minLoadComplete) {
-                    console.log("Finally block executed with minLoadComplete as true");
-                    setLoading(false);
-                    clearInterval(checkInterval);
-                } else {
-                    console.log("Finally block executed, but waiting for minLoadComplete");
-                }
-            }, 100);
+				if (minLoadComplete) {
+					console.log("Finally block executed with minLoadComplete as true");
+					setLoading(false);
+					clearInterval(checkInterval);
+				} else if (checkCount >= maxChecks) {
+					console.log("Max checks reached. Handling as failure/timeout.");
+					// Handle as a failure or timeout
+					setLoading(false);
+					clearInterval(checkInterval);
+				} else {
+					console.log("Finally block executed, but waiting for minLoadComplete");
+				}
+				checkCount++;
+			}, 100);
 		}
 	};
 
