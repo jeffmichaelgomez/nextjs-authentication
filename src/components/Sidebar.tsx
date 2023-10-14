@@ -1,14 +1,10 @@
-import { SidebarButton, StyledSidebar } from "./SidebarStyles";
+import { AdminTitle, SidebarButton, StyledSidebar } from "./SidebarStyles";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import toast from "react-hot-toast";
 
 export default function Sidebar() {
   const router = useRouter();
-
-  const handleSearch = () => {
-    router.push("/search");
-  };
 
   const handleViewProducts = () => {
     router.push("/products");
@@ -31,7 +27,7 @@ export default function Sidebar() {
 
   return (
     <StyledSidebar>
-      <h1>ADMIN PANEL</h1>
+      <AdminTitle>ADMIN PANEL</AdminTitle>
       <SidebarButton onClick={handleViewProducts}>View Products</SidebarButton>
       <SidebarButton onClick={handleProfile}>Profile</SidebarButton>
       <SidebarButton onClick={handleLogout}>Logout</SidebarButton>

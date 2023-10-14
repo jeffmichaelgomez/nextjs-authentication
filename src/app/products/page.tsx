@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../../components/Sidebar-2';
@@ -42,7 +43,14 @@ function ProductRow({ product, onEdit }: ProductRowProps) {
 			<td>{product.lotNo}</td>
 			<td>{new Date(product.expiry).toLocaleDateString()}</td>
 			<td>
-				<SubmitButton onClick={() => onEdit(product)}>Edit</SubmitButton>
+				<Image
+					src="/edit.png"
+					alt="Edit Product"
+          width={20}
+          height={20}
+					style={{ cursor: 'pointer' }} // Makes it look clickable
+					onClick={() => onEdit(product)}
+				/>
 			</td>
 		</tr>
 	);
