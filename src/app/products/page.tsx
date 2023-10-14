@@ -17,6 +17,7 @@ import {
 	SearchWrapper,
 	Spinner,
 } from './ProductStyles';
+import Swal from 'sweetalert2';
 
 type ProductType = {
 	_id: string;
@@ -75,7 +76,21 @@ function ProductList() {
 				products.map((p) => (p._id === updatedProduct._id ? updatedProduct : p))
 			);
 			setEditingProduct(null);
-			alert('Product updated successfully!');
+			Swal.fire({
+				position: 'top-end', // Position to top-end
+				icon: 'success',
+				title: 'Update Successful!',
+				showConfirmButton: false,
+				timer: 1500,
+				toast: true, // Enable toast mode
+				background: '#efefef',
+				showClass: {
+					popup: 'animate__animated animate__fadeInDown',
+				},
+				hideClass: {
+					popup: 'animate__animated animate__fadeOutUp',
+				},
+			});
 		} catch (error) {
 			console.error(error);
 		}
