@@ -39,7 +39,7 @@ export default function SignupPage() {
 			// This will set minLoadComplete to true after 3 seconds
 			setTimeout(() => {
 				setMinLoadComplete(true);
-			}, 3000);
+			}, 2000);
 			const response = await axios.post('/api/users/signup', user);
 			console.log('Signup Success', response.data);
 			Swal.fire({
@@ -60,13 +60,13 @@ export default function SignupPage() {
 			router.push('/login');
 		} catch (error: any) {
 			console.log('Signup failed', error.message);
-			Swal.fire({
+			await Swal.fire({
 				position: 'top-end', // Position to top-end
 				icon: 'error',
-				title: 'Oops...',
+				title: 'Account Already Exist',
 				text: error.message,
 				showConfirmButton: false,
-				timer: 3000,
+				timer: 1500,
 				toast: true, // Enable toast mode
 				background: '#efefef',
 				showClass: {
@@ -76,18 +76,17 @@ export default function SignupPage() {
 					popup: 'animate__animated animate__fadeOutUp',
 				},
 			});
+            setLoading(false);  // Stop spinner immediately
 		} finally {
-			if (minLoadComplete) {
-				setLoading(false);
-			} else {
-				// If minLoadComplete is not true yet, wait until it is true to stop loading
-				const checkInterval = setInterval(() => {
-					if (minLoadComplete) {
-						setLoading(false);
-						clearInterval(checkInterval);
-					}
-				}, 100); // Check every 100ms
-			}
+			const checkInterval = setInterval(() => {
+                if (minLoadComplete) {
+                    console.log("Finally block executed with minLoadComplete as true");
+                    setLoading(false);
+                    clearInterval(checkInterval);
+                } else {
+                    console.log("Finally block executed, but waiting for minLoadComplete");
+                }
+            }, 100);
 		}
 	};
 
