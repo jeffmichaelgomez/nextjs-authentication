@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
 			id: user._id,
 			username: user.username,
 			email: user.email,
+			isAdmin: user.isAdmin,
 		};
 
 		//create token
@@ -46,7 +47,6 @@ export async function POST(request: NextRequest) {
 			success: true,
 		});
 		response.cookies.set('token', token, { httpOnly: true });
-		response.cookies.set('isAdmin', user.isAdmin, { httpOnly: true });
 		return response;
 	} catch (error: any) {
 		return NextResponse.json({ error: error.message }, { status: 500 });

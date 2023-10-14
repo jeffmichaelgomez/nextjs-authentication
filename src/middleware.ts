@@ -1,31 +1,36 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import jwt from 'jsonwebtoken';
-interface MyJwtPayload extends jwt.JwtPayload {
-    isAdmin: boolean;
-    // any other fields you might have
-}
+import { verify } from "./helpers/jose-verify"
 
 // This function can be marked 'async' if using 'await' inside
-export function middleware(request: NextRequest){
+export async function middleware(request: NextRequest){
 
-    const path = request.nextUrl.pathname
-    const isPublicPath = ['/login','/signup', '/verifyemail'].includes(path)
+    const path = request.nextUrl.pathname;
+    const isPublicPath = ['/login', '/signup', '/verifyemail'].includes(path);
     const adminOnlyPaths = ['/products', '/addproduct'].includes(path);
 
-    const token = request.cookies.get('token')?.value || ''
-    const isAdmin = request.cookies.get('isAdmin')?.value === 'true'
+    const token = request.cookies.get('token')?.value || '';
+    let isAdmin = false;
+    if(token){
+        const payload = await verify(token, process.env.TOKEN_SECRET!);
+        isAdmin = payload.isAdmin;
+    }
+    console.log(`ISADMIN ${isAdmin}`)
+    console.log(`Current path: ${path}`);
+    console.log(`Token value: ${token}`);
 
-    if(isPublicPath && token){
-        return NextResponse.redirect(new URL('/profile', request.nextUrl))
+    // If they're on a public path and have a valid token:
+    if (isPublicPath && token) {
+        return NextResponse.redirect(new URL('/profile', request.nextUrl));
     }
 
-    if(!isPublicPath && !token){
+    // If they're trying to access non-public pages without a token:
+    if (!isPublicPath && !token) {
         return NextResponse.redirect(new URL('/login', request.nextUrl));
     }
 
-    if (adminOnlyPaths && !isAdmin) {
-        // Redirect non-admin users somewhere else, e.g., the profile page or an error page
+    // If they're trying to access admin-only paths and are not admin:
+    if (adminOnlyPaths && token && !isAdmin) {
         return NextResponse.redirect(new URL('/profile', request.nextUrl));
     }
 }
