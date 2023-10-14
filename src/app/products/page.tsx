@@ -12,6 +12,8 @@ import {
   StyledInput,
   StyledLabel,
   FormGroup,
+  SearchInput,
+  SearchWrapper
 } from "./ProductStyles";
 
 type ProductType = {
@@ -70,11 +72,13 @@ function ProductList() {
     }
   };
 
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     async function fetchProducts() {
       setLoading(true);
       try {
-        const response = await axios.get(`/api/products?page=${page}`);
+        const response = await axios.get(`/api/products?page=${page}&search=${search}`);
         setProducts(response.data.products);
       } catch (error) {
         console.error(error);
@@ -84,7 +88,7 @@ function ProductList() {
     }
 
     fetchProducts();
-  }, [page]);
+  }, [page, search]);
 
   return (
     <div style={{ display: "flex" }}>
@@ -92,6 +96,13 @@ function ProductList() {
       <FormWrapper>
       <TopSection>
           <FormTitle>{loading ? "Loading..." : "Product List"}</FormTitle>
+          <SearchWrapper>
+            <SearchInput
+              placeholder="Search products..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </SearchWrapper>
           <div>
             <SubmitButton
               onClick={() => setPage((prev) => prev - 1)}

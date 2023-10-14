@@ -32,7 +32,6 @@ export default function Sidebar() {
   return (
     <StyledSidebar>
       <h1>ADMIN PANEL</h1>
-      <SidebarButton onClick={handleSearch}>Search</SidebarButton>
       <SidebarButton onClick={handleAddProducts}>Add Products</SidebarButton>
       <SidebarButton onClick={handleProfile}>Profile</SidebarButton>
       <SidebarButton onClick={handleLogout}>Logout</SidebarButton>
